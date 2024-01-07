@@ -16,3 +16,13 @@ type InFo struct {
 	Icp      string    `json:"icp"` //icp备案号
 	Title    string    `json:"title"` //网站标题
 }
+
+func (receiver *Result) GetHosts() []string {
+	var hosts []string
+	for _,value:=range receiver.InFos{
+		hosts = append(hosts,value.Host)
+		//log.Println(value.Host)
+	}
+	return hosts
+
+}

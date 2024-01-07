@@ -1,6 +1,6 @@
-package config
+package fofa
 
-type FoFa struct {
+type Options struct {
 	Baseurl string //fofa网页基本路径
 	Email   string //会员的邮箱
 	Key     string //会员key

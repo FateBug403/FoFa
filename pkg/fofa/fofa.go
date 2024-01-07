@@ -1,13 +1,12 @@
 package fofa
 
 import (
+	"github.com/FateBug403/FoFa/pkg/model"
+	"github.com/FateBug403/FoFa/pkg/result"
 	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/FateBug403/FoFa/pkg/config"
-	"github.com/FateBug403/FoFa/pkg/model"
-	"github.com/FateBug403/FoFa/pkg/result"
 	simplejson "github.com/bitly/go-simplejson"
 	"github.com/projectdiscovery/retryablehttp-go"
 	"io"
@@ -20,12 +19,12 @@ import (
 )
 
 type FoFa struct {
-	Config *config.FoFa
+	Config *Options
 	HttpClient *retryablehttp.Client
 
 }
 
-func NewFoFa(option *config.FoFa) (*FoFa,error) {
+func NewFoFa(option *Options) (*FoFa,error) {
 	var err error
 	// 创建一个 RetryableClient
 	client := retryablehttp.NewClient(retryablehttp.Options{
