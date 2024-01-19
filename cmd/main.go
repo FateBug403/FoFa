@@ -18,10 +18,6 @@ func main()  {
 		return
 	}
 
-	Result,err:=FoFaClient.SearchAll("icon_hash=\"-1830859634\"")
-	if err != nil {
-		log.Println(err)
-		return
-	}
+	Result:=FoFaClient.SearchAllS([]string{"domain=\"enzyun.com\"","domain=\"wesvr.cn\"","domain=\"wesvr.com\""})
 	log.Println(Result.GetHosts())
 }

@@ -1,12 +1,12 @@
 package fofa
 
 import (
-	"github.com/FateBug403/FoFa/pkg/model"
-	"github.com/FateBug403/FoFa/pkg/result"
 	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/FateBug403/FoFa/pkg/model"
+	"github.com/FateBug403/FoFa/pkg/result"
 	simplejson "github.com/bitly/go-simplejson"
 	"github.com/projectdiscovery/retryablehttp-go"
 	"io"
@@ -126,4 +126,28 @@ func (receiver *FoFa) SearchAll(search string) (*result.Result,error){
 	log.Println("从fofa搜索到"+fmt.Sprint(len(Result.InFos)))
 
 	return &Result,nil
+}
+
+// SearchAllS 批量搜索
+func (receiver *FoFa) SearchAllS(rules []string) *result.Result {
+	//封装返回的数据
+	var Result result.Result
+	for _,rule := range rules{
+		// 获取每个规则的返回结果
+		rt,err:=receiver.SearchAll(rule)
+		if err != nil {
+			log.Println(rule+"获取失败")
+			continue
+		}
+		// 如果有返回数据，则保存到临时全局数组中
+		if len(rt.InFos)>0{
+			log.Printf("当前总数：%d",len(Result.InFos))
+			for _,target :=range rt.InFos{
+				Result.InFos = append(Result.InFos,target)
+			}
+		}
+		// 等待1s
+		time.Sleep(2500*time.Millisecond)
+	}
+	return &Result
 }
