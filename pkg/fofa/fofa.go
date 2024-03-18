@@ -40,7 +40,7 @@ func NewFoFa(option *Options) (*FoFa,error) {
 		NoAdjustTimeout: false,
 	})
 	// 身份验证
-	req, err := retryablehttp.NewRequest(http.MethodGet, fmt.Sprintf("%s/api/v1/info/my?email=%s&key=%s", option.Baseurl, option.Email, option.Key), nil)
+	req, err := retryablehttp.NewRequest(http.MethodGet, fmt.Sprintf("%s/api/v1/info/my?key=%s", option.Baseurl, option.Key), nil)
 	req.Header.Set("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0")
 	resp,err:=client.Do(req)
 	if err != nil {
@@ -80,7 +80,7 @@ func (receiver *FoFa) SearchAll(search string) (*result.Result,error){
 	field :=strings.Join(fields,",")
 
 	//获取查询返回数据
-	req, err := retryablehttp.NewRequest(http.MethodGet,fmt.Sprintf("%s/api/v1/search/all?email=%s&key=%s&qbase64=%s&fields=%s&size=%d", receiver.Config.Baseurl, receiver.Config.Email, receiver.Config.Key, searchbase64, field,receiver.Config.Size), nil)
+	req, err := retryablehttp.NewRequest(http.MethodGet,fmt.Sprintf("%s/api/v1/search/all?key=%s&qbase64=%s&fields=%s&size=%d", receiver.Config.Baseurl,  receiver.Config.Key, searchbase64, field,receiver.Config.Size), nil)
 	req.Header.Set("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0")
 	resp,err:=receiver.HttpClient.Do(req)
 	if err != nil {

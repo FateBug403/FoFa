@@ -8,8 +8,7 @@ import (
 func main()  {
 
 	FoFaClient,err := fofa.NewFoFa(&fofa.Options{
-		Baseurl: "https://fofa.info",
-		Email:   "",
+		Baseurl: "",
 		Key:     "",
 		Size:    10000,
 	})
@@ -18,6 +17,6 @@ func main()  {
 		return
 	}
 
-	Result:=FoFaClient.SearchAllS([]string{"domain=\"enzyun.com\"","domain=\"wesvr.cn\"","domain=\"wesvr.com\""})
+	Result:=FoFaClient.SearchAllS([]string{"domain=\"enzyun.com\""})
 	log.Println(Result.GetHosts())
 }
