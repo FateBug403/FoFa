@@ -18,5 +18,5 @@ func main()  {
 	}
 
 	Result:=FoFaClient.SearchAllS([]string{"domain=\"enzyun.com\""})
-	log.Println(Result.GetHosts())
+	log.Println(Result.GetLinks())
 }

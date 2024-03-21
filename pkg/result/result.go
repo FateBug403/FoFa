@@ -15,6 +15,7 @@ type InFo struct {
 	Server   string    `json:"server"` //网站server
 	Icp      string    `json:"icp"` //icp备案号
 	Title    string    `json:"title"` //网站标题
+	Link     string    `json:"link"`  // 资产的链接
 }
 
 func (receiver *Result) GetHosts() []string {
@@ -25,4 +26,12 @@ func (receiver *Result) GetHosts() []string {
 	}
 	return hosts
 
+}
+func (receiver *Result) GetLinks() []string {
+	var links []string
+	for _,value:=range receiver.InFos{
+		links = append(links,value.Link)
+		//log.Println(value.Host)
+	}
+	return links
 }
